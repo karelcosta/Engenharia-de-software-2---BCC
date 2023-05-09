@@ -3,7 +3,7 @@ import classmotorista
 
 veiculos = [classveiculo.Veiculo("BMW","I8",2023,123,321,"preto",0)]
 motoristas = [classmotorista.Motorista("benjamin", 123, 321, 98)]
-viagens = []
+viagens = [classveiculo.viagem('31/02/2012', veiculos[0], 'Caxias', 'Dubai', motoristas[0])]
 manutencoes = [classveiculo.manutencao(12, '123bc', 734.5)]
 abastecimentos = [classveiculo.Abastecimento(17, '123bc', 134.5)]
 
@@ -55,7 +55,7 @@ while True:
       cpf = int(input("Digite seu cpf: "))
       for i in motoristas():
         if cpf == i.cpf:
-          motoristas.remove()
+          motoristas.remove(i)
     else:
       print('Opção inválida.')
 
@@ -108,11 +108,18 @@ while True:
           i.editar_veiculo(op)
 
     elif sub_opcao == 4:
-      print('Opção selecionada: Deletar Veículo')
-      # Código para deletar um veículo existente
+        print('Opção selecionada: Deletar Veículo')
+        placa_pesquisa = int(
+        input("Digite a placa do veiculo que deseja deletar: "))
+        for i in veiculos:
+            if i.placa == placa_pesquisa:
+                veiculos.remove(i)
     elif sub_opcao == 5:
-      print('Opção selecionada: Ver quilometragem de Veículo')
-      # Código para exibir a quilometragem de um veículo existente
+        print('Opção selecionada: Ver quilometragem de Veículo')
+        placa_pesquisa = int(input("Digite a placa do veiculo: "))
+        for i in veiculos:
+            if placa_pesquisa==i.placa:
+                print(f"A quilometragem do veiculo é {i.quilometragem}.")
     else:
       print('Opção inválida')
 
@@ -127,8 +134,8 @@ while True:
       print('Opção selecionada: Cadastrar Viagem')
       # Código para cadastrar uma nova viagem
     else:
-      print('opição inbvalida')
-  #manutenção
+      print('opição invalida')
+  #abastecimentos
   elif opcao == 4:
     print('1. novo abastecimento')
     print('2. ver abastecimentos')
@@ -142,7 +149,7 @@ while True:
     elif sub_opcao == 2:
       for i in abastecimentos:
         print(f'{i.veiculo} - {i.data} - {i.valor}')
-
+  #manutenção
   elif opcao == 5:
     print('1. nova manutenção')
     print('2. ver manutenções')
@@ -158,7 +165,17 @@ while True:
         print(f'{i.veiculo} - {i.data} - {i.valor}')
 
   elif opcao == 6:
-    print('relatorio')
+      print(f"Relatorio:")
+      for i in veiculos:
+          print(f"Modelo: {i.modelo} - Placa: {i.placa}")
+      for i in motoristas:
+          print(f"Nome:{i.nome} - CPF: {i.cpf}.")
+      for i in viagens:
+          print(f"Data: {i.data} - Origem: {i.origem} Destino: {i.destino}.")
+      for i in manutencoes:
+          print(f"Data: {i.data} - Veiculo: {i.veiculo} - Valor {i.valor}.")
+      for i in abastecimentos:
+          print(f"Data: {i.data} - Veiculo: {i.veiculo} - Valor {i.valor}.") 
   elif opcao == 7:
     exit()
   else:
